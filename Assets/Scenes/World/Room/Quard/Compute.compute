@@ -1,0 +1,44 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+float4 color;
+float4 position;
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+
+RWTexture2D<float4> InputTexA;
+
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	// TODO: insert actual code here!
+
+	float r = id.x * 0.0002;
+
+
+	float d_x = id.x - position.x;
+	d_x = d_x * d_x;
+
+	float d_y = id.y - position.y;
+	d_y = d_y * d_y;
+
+	float d_xy = d_x + d_y;
+
+	float4 c = float4(r, id.y, color.x, 1.0);
+
+	if (d_xy < 250.0f)
+	{
+		c = color;//float4(0, 0, 0, 1.0);
+		Result[id.xy] = c;
+	}
+	else {
+		float4 cR = InputTexA[id.xy];
+
+		Result[id.xy] = cR;//c * 0.9 + cR * 0.1;// float4(id.x & id.y, id.x & id.y, id.x & id.y, 1.0) * color;
+	}
+	
+
+}
