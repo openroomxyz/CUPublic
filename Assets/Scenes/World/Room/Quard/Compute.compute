@@ -16,8 +16,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 {
 	// TODO: insert actual code here!
 
-	float r = id.x * 0.0002;
-
+	
 
 	float d_x = id.x - position.x;
 	d_x = d_x * d_x;
@@ -27,12 +26,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
 	float d_xy = d_x + d_y;
 
-	float4 c = float4(r, id.y, color.x, 1.0);
 
 	if (d_xy < 250.0f)
 	{
-		c = color;//float4(0, 0, 0, 1.0);
-		Result[id.xy] = c;
+		Result[id.xy] = color;
 	}
 	else {
 		float4 cR = InputTexA[id.xy];

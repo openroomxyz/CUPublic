@@ -14,7 +14,7 @@ public class Compute : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MLib.RenderTextureTools.RenderTextureFromPNGImageAt(Application.dataPath + "Assets/1400.png", 1024 * 4,out input_render_texture); 
+        MLib.RenderTextureTools.RenderTextureFromPNGImageAt(Application.dataPath + "Assets/F2.png", 1024 * 4,out input_render_texture); 
     }
 
     
@@ -49,6 +49,11 @@ public class Compute : MonoBehaviour
         if(result_render_texture != null)
         {
             result_render_texture.Release();
+        }
+
+        if(input_render_texture != null)
+        {
+            input_render_texture.Release();
         }
     }
     void RUN()
